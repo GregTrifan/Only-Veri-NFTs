@@ -1,9 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Button, MenuDropdown, WalletOptionsModal } from "..";
 import { useAccount } from "wagmi";
-
+import Link from "next/link";
+import { BiMenu } from "react-icons/bi";
+import AboutMenu from "./AboutMenu";
+import MobileMenu from "./MobileMenu";
 interface Props {
   children: ReactNode;
   showWalletOptions: boolean;
@@ -16,6 +19,7 @@ export default function Layout(props: Props) {
   const [{ data: accountData, loading }, disconnect] = useAccount({
     fetchEns: true,
   });
+  const [showMobileMenu,setShowMobileMenu] = useState(false);
 
   const renderLabel = () => {
     if (accountData?.ens) {
@@ -75,8 +79,8 @@ export default function Layout(props: Props) {
   return (
     <div>
       <Head>
-        <title>NextJS wagmi</title>
-        <meta name="description" content="NextJS and wagmi template" />
+        <title>Veri NFTs</title>
+        <meta name="description" content="Veri NFTs Collection" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -85,14 +89,35 @@ export default function Layout(props: Props) {
         setOpen={setShowWalletOptions}
       />
 
-      <div className="absolute w-screen bg-gradient-to-r from-black to-white">
-        <div className="flex items-center justify-between p-4">
+      <div className="absolute w-screen rounded-b-lg shadow-lg shadow-cyan-500/50 bg-gradient-to-tr from-emerald-500 to-blue-600">
+        <div className="flex items-center justify-between py-2 px-4">
           <div className="flex items-center">
-            <h4 className="text-2xl font-bold text-white cursor-default">
-              NextJS wagmi
+            <h4 className="text-2xl font-bold italic text-white cursor-default">
+              Veri NFTs
             </h4>
+            <div className="mx-4">
+              <div className="hidden md:block">
+                <Link href="/upload">
+                  <a className=" transition hover:bg-black/10 text-blue-100 hover:text-white  px-3 py-2 rounded-md text-sm font-medium">
+                    Upload
+                  </a>
+                </Link>
+                <Link href="/blog">
+                  <a className=" transition hover:bg-black/10 text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    Blog
+                  </a>
+                </Link>
+                <AboutMenu />
+              </div>
+            </div>
           </div>
-          {renderButton()}
+          <div className="inline-flex">
+            {renderButton()}
+            <button className="justify-center md:hidden" onClick={()=>setShowMobileMenu(true)}>
+              <BiMenu className="w-5 h-5 ml-2 -mr-1 text-blue-100 hover:text-white" />
+            </button>
+            <MobileMenu open={showMobileMenu} setOpen={setShowMobileMenu}/>
+          </div>
         </div>
       </div>
       {children}

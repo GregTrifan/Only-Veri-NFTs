@@ -30,8 +30,8 @@ const Home: NextPage = () => {
 
     return (
       <>
-        <h1 className="mb-8 text-4xl font-bold">
-          Welcome to the NextJS wagmi template!
+        <h1 className="mb-8 text-4xl font-black italic text-transparent bg-clip-text bg-gradient-to-tr from-emerald-500 to-blue-600">
+          Welcome to Veri NFTs
         </h1>
         <Button
           loading={accountLoading}

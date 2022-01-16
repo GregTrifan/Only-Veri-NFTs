@@ -15,9 +15,9 @@ export default function Example(props: Props) {
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex justify-between p-3 font-semibold border border-black rounded-md h-14 w-52 place-items-center">
+      <Menu.Button className="inline-flex justify-between px-3 py-2 font-semibold border border-black rounded-full w-52 place-items-center">
         {label}
-        <AiFillCaretDown className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
+        <AiFillCaretDown className="w-4 h-4 ml-2 -mr-1" aria-hidden="true" />
       </Menu.Button>
       <Transition
         as={Fragment}
